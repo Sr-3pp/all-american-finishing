@@ -1,0 +1,19 @@
+{
+    "color": {
+        "white": {"value": "#FFF"},
+        "black": {"value": "#000"},
+        "dark-gray": {"value": "#636b6f"},
+        "aff": {
+            "red": {"value": "#8B181A"},
+            "blue": {"value": "#1E4380"},
+            "light-gray": {"value": "#A1A3A4"},
+            "gray": {"value": "#595A5C"},
+            "dark-gray": {"value": "#010101"}
+        },
+        "system": {
+            "error": { "value": "#bf5329" },
+            "success": { "value": "#2ab27b" },
+            "warning": { "value": "#cbb956" }
+        }
+    }
+}

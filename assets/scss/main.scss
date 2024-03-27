@@ -1,0 +1,53 @@
+@import "./components/SrInput.scss";
+@import "./components/SrText.scss";
+
+body {
+  overflow-x: hidden;
+  margin: 0;
+  font-family: Helvetica, sans-serif;
+  color: $color-aff-dark-gray;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.with-space {
+  padding: {
+    top: pxToRem(30);
+    bottom: pxToRem(30);
+  }
+
+  @media (min-width: $breakpoint-sm) {
+    padding: {
+      top: pxToRem(40);
+      bottom: pxToRem(40);
+    }
+  }
+
+  @media (min-width: $breakpoint-md) {
+    padding: {
+      top: pxToRem(50);
+      bottom: pxToRem(50);
+    }
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+fieldset {
+  border: none;
+}
+
+p {
+  margin: 0;
+}

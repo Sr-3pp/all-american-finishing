@@ -1,0 +1,97 @@
+@font-face {
+    font-family: 'aeromatics';
+    src: url('~/assets/scss/fonts/aeromatics/AeroMaticsLightItalic.woff2') format('woff2'),
+        url('~/assets/scss/fonts/aeromatics/AeroMaticsLightItalic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'aeromatics';
+    src: url('~/assets/scss/fonts/aeromatics/AeroMaticsBoldItalic.woff2') format('woff2'),
+        url('~/assets/scss/fonts/aeromatics/AeroMaticsBoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'aeromatics';
+    src: url('~/assets/scss/fonts/aeromatics/AeroMaticsItalic.woff2') format('woff2'),
+        url('~/assets/scss/fonts/aeromatics/AeroMaticsItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'aeromatics';
+    src: url('~/assets/scss/fonts/aeromatics/AeroMaticsRegular.woff2') format('woff2'),
+        url('~/assets/scss/fonts/aeromatics/AeroMaticsRegular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'aeromatics';
+    src: url('~/assets/scss/fonts/aeromatics/AeroMaticsLightRegular.woff2') format('woff2'),
+        url('~/assets/scss/fonts/aeromatics/AeroMaticsLightRegular.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'aeromatics';
+    src: url('~/assets/scss/fonts/aeromatics/AeroMaticsBold.woff2') format('woff2'),
+        url('~/assets/scss/fonts/aeromatics/AeroMaticsBold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+
+
+@font-face {
+    font-family: 'Helvetica';
+    src: url('~/assets/scss/fonts/helvetica/Helvetica-Oblique.woff2') format('woff2'),
+        url('~/assets/scss/fonts/helvetica/Helvetica-Oblique.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Helvetica';
+    src: url('~/assets/scss/fonts/helvetica/Helvetica-Light.woff2') format('woff2'),
+        url('~/assets/scss/fonts/helvetica/Helvetica-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Helvetica';
+    src: url('~/assets/scss/fonts/helvetica/Helvetica-Bold.woff2') format('woff2'),
+        url('~/assets/scss/fonts/helvetica/Helvetica-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Helvetica';
+    src: url('~/assets/scss/fonts/helvetica/Helvetica-LightOblique.woff2') format('woff2'),
+        url('~/assets/scss/fonts/helvetica/Helvetica-LightOblique.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Helvetica';
+    src: url('~/assets/scss/fonts/helvetica/Helvetica-BoldOblique.woff2') format('woff2'),
+        url('~/assets/scss/fonts/helvetica/Helvetica-BoldOblique.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Helvetica';
+    src: url('~/assets/scss/fonts/helvetica/Helvetica.woff2') format('woff2'),
+        url('~/assets/scss/fonts/helvetica/Helvetica.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

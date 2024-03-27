@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+  aaf-dev:
+    build:
+      context: .
+      dockerfile: ./dockerfile.dev
+    env_file:
+      - docker.env
+    ports:
+      - "3000:3000"
+      - "24678:24678"
+    depends_on:
+      - mongo
+    volumes:
+      - .:/src
+      - node_modules:/src/node_modules
+
+volumes:
+  mongodb_data:
+  node_modules:

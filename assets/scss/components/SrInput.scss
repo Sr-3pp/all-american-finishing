@@ -1,0 +1,45 @@
+.sr-form-input {
+  --input-bg: #{$color-white};
+  --input-border-color: transparent;
+  position: relative;
+  padding-top: pxToRem(0) !important;
+  &-label {
+    position: absolute;
+    z-index: 0;
+    left: pxToRem(10);
+    top: pxToRem(30);
+    text-transform: capitalize;
+    font-size: pxToRem(14);
+    transform: translateY(-50%);
+    transition: transform 0.35s ease, top 0.35s ease;
+  }
+
+  &-input {
+    position: relative;
+    z-index: 1;
+    height: pxToRem(40);
+    border-radius: pxToRem(4) !important;
+    margin-bottom: pxToRem(20) !important;
+    padding: pxToRem(10) !important;
+    font-size: pxToRem(14) !important;
+
+    &:focus {
+      background-color: $color-white;
+      ~ .sr-input-label {
+        top: pxToRem(-10);
+        transform: translateY(0);
+      }
+    }
+  }
+
+  textarea {
+    height: pxToRem(100);
+  }
+
+  &.filled {
+    .sr-input-label {
+      top: pxToRem(-10);
+      transform: translateY(0);
+    }
+  }
+}

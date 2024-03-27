@@ -1,0 +1,31 @@
+.sr-text {
+  .sr-text-container {
+    font-family: inherit;
+    white-space: pre-line;
+  }
+  &.title {
+    font-weight: bold;
+    font-family: aeromatics;
+    font-style: italic;
+    font-size: pxToRem(32) !important;
+  }
+  &.subtitle {
+    font-family: aeromatics;
+    font-size: pxToRem(24) !important;
+    font-style: italic;
+    font-weight: bold;
+  }
+  &:not(.title):not(.subtitle) {
+    font-size: pxToRem(18);
+    line-height: pxToRem(30);
+  }
+
+  &.text {
+    &-center {
+      --text-align: center !important;
+    }
+    &-right {
+      --text-align: right !important;
+    }
+  }
+}
