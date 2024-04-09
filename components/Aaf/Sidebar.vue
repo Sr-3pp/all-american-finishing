@@ -15,6 +15,10 @@ aside.aff-sidebar
           NuxtLink.aff-sidebar-item-link(:to="item.link")
             SrIcon.aff-sidebar-item-icon(:name="item.icon")
             span.aff-sidebar-item-label {{ item.label }}
+        li.aff-sidebar-item
+          button.aff-sidebar-item-link(@click="$emit('logout')")
+            SrIcon.aff-sidebar-item-icon(name="logout-o")
+            span.aff-sidebar-item-label Logout
 </template>
 
 <style lang="scss" scoped>
@@ -42,6 +46,8 @@ aside.aff-sidebar
     &-link {
       position: relative;
       display: flex;
+      background: none;
+      border: none;
     }
     &-icon {
       color: $color-white;
@@ -57,6 +63,7 @@ aside.aff-sidebar
       background-color: $color-aff-blue;
       color: $color-white;
       max-width: 0;
+      overflow: hidden;
       transition: max-width 0.35s ease-in-out, padding 0.35s ease;
 
       &::before {

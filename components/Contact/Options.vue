@@ -5,7 +5,7 @@ div.contact-options
             SrIcon.contact-options-icon(:name="item.icon")
             article.contact-options-info
                 SrText(:text="item.title" class="title")
-                SrText(:text="item.value")
+                SrText(:html="item.value" :class="{email: item.title == 'E mail'}")
     div.open-title(v-if="(!only_hours && !only_contact) || (only_hours && !only_contact)")
         SrIcon(name="clock-o")
         SrText(text="Opening Hours" class="title")
@@ -102,6 +102,7 @@ export default defineComponent({
     width: pxToRem(40);
     height: pxToRem(40);
     margin-right: pxToRem(40);
+    flex-shrink: 0;
   }
 
   &-info {
@@ -112,6 +113,9 @@ export default defineComponent({
         .sr-text-container {
           color: $color-white;
         }
+      }
+      &.email {
+        --text-size: 90%;
       }
       &:not(.title) {
         font-size: pxToRem(18);

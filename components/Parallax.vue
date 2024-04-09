@@ -6,7 +6,9 @@ const { x, y } = useWindowScroll();
 watch([x, y], () => {
   const totalHeight = document.body.clientHeight - window.innerHeight;
   const percent = ((y.value / totalHeight) * 100).toFixed(2);
-  (parallax as any).value.style.backgroundPosition = `0% ${percent}%`;
+
+  if (parallax.value)
+    (parallax as any).value.style.backgroundPosition = `0% ${percent}%`;
 });
 </script>
 

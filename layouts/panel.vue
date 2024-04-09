@@ -46,11 +46,12 @@ const sidebarItems = [
     link: "/panel/content",
   },
 ];
+const logout = () => useAuth().logout();
 </script>
 
 <template lang="pug">
 main.panel
-  AafSidebar(:items="sidebarItems")
+  AafSidebar(:items="sidebarItems" @logout="logout")
   NuxtPage
 </template>
 

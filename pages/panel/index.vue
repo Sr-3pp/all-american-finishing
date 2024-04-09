@@ -4,8 +4,9 @@ definePageMeta({
 });
 </script>
 
-<template>
-  <div>Page: panel index</div>
+<template lang="pug">
+SrContainer(:with-padding="true")
+  SrText(text="Panel")
 </template>
 
 <style scoped></style>

@@ -90,7 +90,11 @@ export default defineComponent({
   &_3 {
     position: relative;
     overflow: hidden;
-    background-color: transparent;
+    background-color: $color-aff-blue;
+
+    @media (min-width: $breakpoint-sm) {
+      background-color: transparent;
+    }
 
     &_bg {
       position: absolute !important;
@@ -106,24 +110,55 @@ export default defineComponent({
         width: 100%;
         top: 0;
         left: 0;
+
+        height: 40%;
+
+        img {
+          height: 100%;
+        }
+
+        @media (min-width: $breakpoint-sm) {
+          height: 100%;
+          img {
+            height: auto;
+          }
+        }
       }
       .star-bg {
         width: auto !important;
         height: 100% !important;
         margin-left: auto;
         overflow: visible !important;
-        img {
-          height: 100% !important;
+
+        @media (min-width: $breakpoint-sm) {
+          min-width: 60%;
+          img {
+            height: auto !important;
+          }
         }
       }
     }
 
     .sr-container {
+      &.contained {
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+      }
       position: relative;
 
       .sr-text {
         width: 100%;
         color: $color-white;
+        padding-right: pxToRem(20);
+        padding-left: pxToRem(20);
+
+        &.text-right {
+          width: 80%;
+          margin-left: auto;
+          @media (min-width: $breakpoint-sm) {
+            width: 100%;
+          }
+        }
 
         &.text {
           max-width: 60%;
@@ -150,15 +185,26 @@ export default defineComponent({
 
     .counter_wrapper {
       display: flex;
-      justify-content: flex-end;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
       width: 100%;
+      background-color: $color-aff-blue;
+
+      @media (min-width: $breakpoint-sm) {
+        flex-direction: row;
+        justify-content: flex-end;
+      }
 
       .aff-counter {
         color: $color-white;
-        padding-top: pxToRem(60);
+        padding-top: pxToRem(30);
 
-        &:not(:last-child) {
-          margin-right: pxToRem(20);
+        @media (min-width: $breakpoint-sm) {
+          padding-top: pxToRem(60);
+          &:not(:last-child) {
+            margin-right: pxToRem(20);
+          }
         }
 
         .sr-text {
@@ -170,19 +216,16 @@ export default defineComponent({
   }
 
   &_4 {
-    .sr-wrapper {
-      .sr-text {
-        color: $color-aff-gray;
-        &.title {
-          margin-bottom: pxToRem(10);
-        }
-      }
+    .sr-text {
+      --text-align: center !important;
     }
 
     .sr-icon {
       width: pxToRem(100);
       height: pxToRem(100);
-      margin-right: pxToRem(20);
+      margin-right: auto;
+      margin-left: auto;
+      margin-bottom: pxToRem(20);
     }
   }
 
