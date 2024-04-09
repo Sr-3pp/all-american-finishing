@@ -34,16 +34,15 @@ const props = defineProps({
   },
 });
 
-const current: any = ref(props.items[0]);
+const current: Ref<any> = ref(props.items.at(0));
 const changing: Ref<boolean> = ref(false);
-
-const toggleContent = (sw: boolean, idx: number) => {
-  const current: any = props.items.find(({ active }: any) => active);
+const toggleContent = (_: any, idx: number) => {
+  const _current: any = props.items.find(({ active }: any) => active);
   const element: any = props.items[idx];
 
-  if (current.value) current.value.active = false;
+  if (current.value.active) current.value.active = false;
 
-  if (current.value !== element) {
+  if (_current !== element) {
     changing.value = true;
     element.active = true;
     current.value = element;

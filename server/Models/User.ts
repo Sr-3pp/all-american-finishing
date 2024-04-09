@@ -4,7 +4,7 @@ const schema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     email: { type: String, unique: true },
-    password: { type: String, bcrypt: true },
+    password: { type: String, bcrypt: true, select: false },
     kind: {
       type: String,
       enum: ["admin", "user"],

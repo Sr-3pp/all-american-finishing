@@ -22,6 +22,7 @@
     "vitest": "^0.33.0"
   },
   "dependencies": {
+    "@types/jsonwebtoken": "^9.0.6",
     "@vitejs/plugin-vue": "^4.3.4",
     "@vue/test-utils": "^2.4.1",
     "jsdom": "^22.1.0",
@@ -29,7 +30,7 @@
     "mongoose": "^7.5.1",
     "mongoose-bcrypt": "^1.10.1",
     "nuxt-swiper": "^1.2.2",
-    "sr-content-2": "^0.0.21",
+    "sr-content-2": "^0.0.25",
     "three": "^0.153.0",
     "vite-tsconfig-paths": "^4.2.1"
   }

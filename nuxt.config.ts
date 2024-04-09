@@ -5,6 +5,9 @@ export default defineNuxtConfig({
       mongo: {
         url: process.env.MONGO_URL,
       },
+      jwt: {
+        secret: process.env.JWT_SECRET,
+      },
     },
   },
   components: {

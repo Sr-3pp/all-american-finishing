@@ -28,7 +28,7 @@ SrTabs.aff-tabs(
                         @media-gallery="EmitHandler($event, item, (data: any) =>$emit('media-gallery', data))"
                         @icon-gallery="EmitHandler($event, item, (data: any) =>$emit('icon-gallery', data))"
                     )
-                    button(@click="EmitHandler(null, tabs[current], (data: any) =>$emit('component-list', data))")
+                    button(@click="EmitHandler(null, tabs[current], (data: any) =>$emit('component-list', data))" v-if="editable")
                       SrText(text="add component")
 </template>
 
@@ -43,6 +43,10 @@ const props: any = defineProps({
   tabs: {
     type: Array,
     default: () => [],
+  },
+  editable: {
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -85,7 +89,7 @@ const editProps = ($event: any, props: any, component: any) => {
       background-color: rgba($color: $color-aff-blue, $alpha: 0.25);
       border: none;
       color: $color-white;
-      padding: pxToRem(8) pxToRem(10);
+      padding: pxToRem(4) pxToRem(5);
       border-radius: pxToRem(16);
       font-style: italic;
       font-weight: bold;
@@ -99,6 +103,11 @@ const editProps = ($event: any, props: any, component: any) => {
 
       span {
         border: none !important;
+        display: none;
+
+        @media (min-width: $breakpoint-sm) {
+          display: block;
+        }
       }
 
       &.active,
@@ -109,16 +118,26 @@ const editProps = ($event: any, props: any, component: any) => {
       }
 
       &:not(:last-child) {
-        margin-right: pxToRem(20);
+        margin-right: pxToRem(6);
       }
 
       .sr-icon {
         margin-right: pxToRem(2);
-        width: 30%;
+        width: 100%;
         aspect-ratio: 1 / 1;
         flex-shrink: 0;
         svg {
           stroke: currentColor;
+        }
+      }
+
+      @media (min-width: $breakpoint-sm) {
+        padding: pxToRem(8) pxToRem(10);
+        &:not(:last-child) {
+          margin-right: pxToRem(20);
+        }
+        .sr-icon {
+          width: 30%;
         }
       }
     }

@@ -1,56 +1,63 @@
 <template lang="pug">
 .aff-counter
     SrText.aff-counter-label(:text="label") 
-    span.aff-counter-number {{ value }}   
+    span.aff-counter-number(ref="counterEl") {{ value }}   
 </template>
 
-<script lang="ts">
-export default defineComponent({
-  props: {
-    label: {
-      type: String,
-      default: "",
-    },
-    start: {
-      type: Number,
-      default: 0,
-    },
-    end: {
-      type: Number,
-      default: 0,
-    },
+<script lang="ts" setup>
+const props = defineProps({
+  label: {
+    type: String,
+    default: "",
   },
-  data() {
-    const value: number = this.start;
-    const is_visible: any = useElementVisibility(this.$el);
-    const counts: any = null;
-    return {
-      value,
-      is_visible,
-      counts,
-    };
+  start: {
+    type: Number,
+    default: 0,
   },
-  onMounted() {
-    this.counts = setInterval(this.startCount);
-  },
-  methods: {
-    startCount() {
-      this.value++;
-      if (this.value == this.end) {
-        clearInterval(this.counts);
-      }
-    },
-  },
-  watch: {
-    is_visible: {
-      handler(sw: any) {
-        if (sw) {
-          this.startCount();
-        }
-      },
-    },
+  end: {
+    type: Number,
+    default: 0,
   },
 });
+
+const counterEl: Ref<HTMLElement | null> = ref(null);
+const value: Ref<number> = ref(props.start);
+const scrolled: Ref<any> = ref(useWindowScroll());
+const counting = ref(false);
+
+const startCount: any = () => {
+  if (props.end.toString().length > 3) {
+    value.value += 150;
+  } else if (props.end.toString().length > 2) {
+    value.value += 50;
+  } else {
+    value.value++;
+  }
+  if (value.value >= props.end) {
+    clearInterval(counts.value);
+    counting.value = false;
+  }
+};
+const counts: Ref<any> = ref(null);
+
+const initInterval: any = () => {
+  counting.value = true;
+  counts.value = setInterval(startCount, 80);
+};
+
+watch(
+  () => scrolled.value.y,
+  () => {
+    const sw = useElementVisibility(counterEl).value;
+    if (sw && value.value < props.end && !counting.value) {
+      initInterval();
+    } else if (!sw && !counting.value) {
+      clearInterval(counts.value);
+      counting.value = false;
+      value.value = 0;
+    }
+  }
+);
 </script>
 
 <style lang="scss">
@@ -65,19 +72,26 @@ export default defineComponent({
     margin: auto;
     &.sr-text {
       font-style: italic;
-      font-size: pxToRem(30) !important;
+      font-size: pxToRem(20) !important;
       font-weight: bold;
       margin-bottom: pxToRem(10) !important;
       font-family: aeromatics;
+
+      @media (min-width: $breakpoint-sm) {
+        font-size: pxToRem(30) !important;
+      }
     }
   }
 
   &-number {
     color: currentColor;
-    font-size: pxToRem(60);
+    font-size: pxToRem(30);
     font-family: aeromatics;
     font-style: italic;
     font-weight: bold;
+    @media (min-width: $breakpoint-sm) {
+      font-size: pxToRem(40);
+    }
   }
 }
 </style>
