@@ -6,7 +6,7 @@ import { fillForm, resetForm } from "~/assets/ts/utilities";
 
 const { data }: any = await useFetch("/api/user");
 const { data: users } = data.value;
-const userModal = ref(false);
+const userModal = ref(null);
 const currentUser = ref(null);
 const userForm = ref([
   {
@@ -51,14 +51,13 @@ const runAction = ({ action, idx }: any) => {
   } else if (action == "edit") {
     currentUser.value = users[idx];
     fillForm(userForm, currentUser.value);
-    userModal.value = true;
+    (userModal.value as any).toggle();
   }
 };
 
 const newUser = () => {
   resetForm(userForm);
-
-  userModal.value = true;
+  (userModal.value as any).toggle();
 };
 
 const updateUser = async (data: any) => {
@@ -70,7 +69,7 @@ const updateUser = async (data: any) => {
 
     const idx = users.findIndex((u: any) => u._id === user._id);
     users[idx] = user;
-    userModal.value = false;
+    (userModal.value as any).toggle();
     resetForm(userForm);
   } catch (error) {
     console.log(error);
@@ -87,7 +86,7 @@ const sendUser = async (data: any) => {
       body: JSON.stringify(data),
     });
     users.unshift(user);
-    userModal.value = false;
+    (userModal.value as any).toggle();
   } catch (error) {
     console.log(error);
   }
@@ -118,9 +117,8 @@ const deleteUser = async (id: string) => {
         button(@click="newUser") Add User
     AafTable(:data="users" :editable="true" @action="runAction")
 
-SrModal(:active="userModal" @close="userModal = false")
+SrModal(ref="userModal")
   template(#body)
-    .sr-modal-body
       SrForm(:fieldsets="userForm" submit="Add User" @submit="sendUser")
 </template>
 

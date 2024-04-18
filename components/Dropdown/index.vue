@@ -1,5 +1,5 @@
 <template lang="pug">
-SrAccordion.aff-dropdown(:open="active")
+SrAccordion.aff-dropdown(ref="affDropdown" :isOpen="isOpen" @toggle="$emit('toggle')")
     template(#label)
         .sr-accordion-label
             SrIcon.star-icon(name="star-f")
@@ -27,7 +27,7 @@ import {
 } from "sr-content-2/assets/ts/utilities";
 
 const props = defineProps({
-  active: {
+  isOpen: {
     type: Boolean,
     default: false,
   },
@@ -41,7 +41,10 @@ const props = defineProps({
   },
 });
 
+const affDropdown = ref(null);
+
 const emit = defineEmits([
+  "toggle",
   "edit-props",
   "component-list",
   "media-gallery",
@@ -54,6 +57,10 @@ const editProps = ($event: any, component: any) => {
   );
   EmitHandler($event, component, (data: any) => emit("edit-props", data));
 };
+
+defineExpose({
+  elemRef: affDropdown,
+});
 </script>
 
 <style lang="scss">

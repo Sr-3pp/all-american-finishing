@@ -9,7 +9,7 @@ import { fillForm } from "~/assets/ts/utilities";
 const { content } = await queryContent("_jobs");
 const { jobs } = content;
 
-const jobModal = ref(false);
+const modalJob = ref(null);
 const currentJob: any = ref(null);
 const jobForm = ref([
   {
@@ -73,14 +73,14 @@ const sendJob = async () => {
       },
     });
 
-    jobModal.value = false;
+    (modalJob.value as any).toggle();
   } catch (error) {
     console.log(error);
   }
 };
 
 const openJobModal = () => {
-  jobModal.value = true;
+  (modalJob.value as any).toggle();
 };
 
 const deleteJob = (idx: number) => {
@@ -95,7 +95,7 @@ const runAction = ({ action, idx }: any) => {
   } else if (action == "edit") {
     currentJob.value = jobs[idx];
     fillForm(jobForm, jobs[idx]);
-    jobModal.value = true;
+    (modalJob.value as any).toggle();
   }
 };
 </script>
@@ -108,9 +108,8 @@ const runAction = ({ action, idx }: any) => {
       button(@click="openJobModal") Add Job
     AafTable(:data="jobs" :editable="true" @action="runAction")
 
-  SrModal(:active="jobModal" @close="jobModal = false")
+  SrModal(ref="modalJob")
     template(#body)
-      .sr-modal-body
         SrForm(:fieldsets="jobForm" submit="Add position" @submit="submitHandler")
 </template>
 

@@ -4,15 +4,13 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
-  active: {
-    type: Boolean,
-    default: false,
-  },
   path: {
     type: String,
     default: "/media",
   },
 });
+
+const mediaModal = ref(null);
 
 const emit = defineEmits([
   "close",
@@ -50,10 +48,14 @@ const deletePicture = (name: string, idx: number) => {
 
   emit("delete-picture", idx);
 };
+
+defineExpose({
+  elemRef: mediaModal,
+});
 </script>
 
 <template lang="pug">
-SrModal.aff-gallery(:active="active" @close="$emit('close')")
+SrModal.aff-gallery(ref="mediaModal")
   template(#body)
     .sr-modal-body
       .aff-gallery-header

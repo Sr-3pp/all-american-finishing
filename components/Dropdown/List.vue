@@ -3,7 +3,7 @@ SrGrid.aff-dropdown-list
     SrGridColumn(:size="{mobile: '1', sm: with_image ? '1/2' : '1' }")
         ul.aff-dropdown-list-list 
             li(v-for="(item, i) in items" :key="i")
-                Dropdown(v-bind="item" @toggle="(sw) => toggleContent(sw, i)"
+                Dropdown(ref="dropdownGroupEl" v-bind="item" @toggle="toggleContent(i)"
                 @input="updateValue(item, $event)"
                 @change="updateValue(item, $event)" 
                 @delete="deleteElement(content, i)"
@@ -34,22 +34,17 @@ const props = defineProps({
   },
 });
 
+const dropdownGroupEl: Ref<HTMLElement | null> = ref(null);
+
 const current: Ref<any> = ref(props.items.at(0));
 const changing: Ref<boolean> = ref(false);
-const toggleContent = (_: any, idx: number) => {
-  const _current: any = props.items.find(({ active }: any) => active);
-  const element: any = props.items[idx];
-
-  if (current.value.active) current.value.active = false;
-
-  if (_current !== element) {
-    changing.value = true;
-    element.active = true;
-    current.value = element;
-    setTimeout(() => {
-      changing.value = false;
-    }, 350);
-  }
+const toggleContent = (idx: number) => {
+  console.log("toggleContent", dropdownGroupEl.value);
+  (dropdownGroupEl.value as any).forEach((el: any, i: number) => {
+    if (i !== idx) {
+      el.elemRef.close();
+    }
+  });
 };
 const emit = defineEmits([
   "edit-props",

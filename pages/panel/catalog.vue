@@ -8,7 +8,7 @@ import { fillForm, resetForm } from "~/assets/ts/utilities";
 
 const { data }: any = await useFetch("/api/catalog");
 const { data: catalog } = data.value;
-const catalogModal: Ref<Boolean> = ref(false);
+const catalogModal: Ref<Component | null> = ref(null);
 
 const thumbs: Ref<Array<string>> = ref([]);
 const thumbFiles: Ref<Array<any>> = ref([]);
@@ -16,7 +16,11 @@ const thumbFiles: Ref<Array<any>> = ref([]);
 const currentProduct: any = ref(null);
 
 const openModal = () => {
-  catalogModal.value = true;
+  resetForm(catalogForm);
+  thumbs.value = [];
+  thumbFiles.value = [];
+  currentProduct.value = null;
+  (catalogModal.value as any).toggle();
 };
 
 const updateProduct = (data: any) => {
@@ -48,7 +52,7 @@ const updateProduct = (data: any) => {
   });
 
   currentProduct.value = null;
-  catalogModal.value = false;
+  (catalogModal.value as any).toggle();
 };
 
 const addProduct = async (data: any) => {
@@ -73,7 +77,7 @@ const addProduct = async (data: any) => {
       body: formData,
     });
     catalog?.push(product as any);
-    catalogModal.value = false;
+    (catalogModal.value as any).toggle();
     thumbs.value = [];
     thumbFiles.value = [];
     resetForm(catalogForm);
@@ -111,7 +115,7 @@ const runAction = ({ action, idx }: any) => {
   } else if (action == "edit") {
     currentProduct.value = catalog[idx];
     fillForm(catalogForm, currentProduct.value);
-    catalogModal.value = true;
+    (catalogModal.value as any).toggle();
   }
 };
 
@@ -213,9 +217,8 @@ const deleteThumb = (idx: number) => {
       SrText(text="Catalog")
       button(@click="openModal") Add
     AafTable(:data="catalog" :editable="true" @action="runAction")
-  SrModal(:active="catalogModal" @close="catalogModal = false")
+  SrModal(ref="catalogModal")
     template(#body)
-      .sr-modal-body
         SrForm(:fieldsets="catalogForm" submit="Add" @submit="submitHandler")
           template(#legal)
             ul.aff-catalog-thumbs

@@ -9,7 +9,7 @@ const { data } = await useFetch("/api/project");
 
 const { data: projects }: any = data.value || [];
 
-const projectModal = ref(false);
+const projectModal = ref(null);
 const thumbs: Ref<Array<string>> = ref([]);
 const thumbsFiles: Ref<Array<any>> = ref([]);
 const currentProject: Ref<Project> = ref(null);
@@ -61,7 +61,7 @@ const updateProject = async (data: any) => {
   const idx = projects.findIndex((p: any) => p._id === project._id);
   projects[idx] = project;
 
-  projectModal.value = false;
+  (projectModal.value as any).toggle();
   resetForm(projectForm);
 };
 
@@ -74,7 +74,7 @@ const addProject = async (data: any) => {
   });
 
   projects.push(project);
-  projectModal.value = false;
+  (projectModal.value as any).toggle();
   resetForm(projectForm);
   thumbs.value = [];
 };
@@ -95,13 +95,13 @@ const newProject = () => {
   thumbs.value = [];
   thumbsFiles.value = [];
   resetForm(projectForm);
-  projectModal.value = true;
+  (projectModal.value as any).toggle();
 };
 
 const editProject = (project: any) => {
   currentProject.value = project;
   fillForm(projectForm, project);
-  projectModal.value = true;
+  (projectModal.value as any).toggle();
 };
 
 const deleteProject = async (idx: number) => {
@@ -154,9 +154,8 @@ const previewThumbs = (event: any) => {
           SrPicture(:src="project.thumbs[0]")
         button(@click="deleteProject(i)") Delete
 
-  SrModal(:active="projectModal" @close="projectModal = false")
+  SrModal(ref="projectModal")
     template(#body)
-      .sr-modal-body
         SrForm(:fieldsets="projectForm" submit="Add Project" @submit="submitHandler")
           template(#legal)
             SrGrid.aff-projects-thumbs(tag="ul")

@@ -17,8 +17,8 @@ const gallery = ref(data);
 const defaultPicture = ref("/media/testimonials/default.jpg");
 const currentTestimonial = ref(null);
 
-const mediaGallery = ref(false);
-const testimonialModal = ref(false);
+const testimonialModal = ref(null);
+const mediaModal = ref(null);
 const testimonalForm = ref([
   {
     fields: [
@@ -65,7 +65,7 @@ const testimonialPicture = computed(() => {
 const newTestimonial = () => {
   currentTestimonial.value = null;
   resetForm(testimonalForm);
-  testimonialModal.value = true;
+  (testimonialModal.value as any).toggle();
 };
 
 const updateTestimonial = (data: any) => {
@@ -100,7 +100,7 @@ const sendTestimonial = async () => {
         content: testimonials.value,
       },
     });
-    testimonialModal.value = false;
+    (testimonialModal.value as any).toggle();
   } catch (error) {
     console.log(error);
   }
@@ -112,7 +112,7 @@ const runAction = ({ action, idx }: any) => {
     deleteTestimonial();
   } else if (action == "edit") {
     fillForm(testimonalForm, testimonials.value.testimonials[idx], ["picture"]);
-    testimonialModal.value = true;
+    (testimonialModal.value as any).toggle();
   }
 };
 
@@ -125,7 +125,7 @@ const submitHandler = (data: any) => {
 };
 
 const openMediaGallery = () => {
-  mediaGallery.value = true;
+  (mediaModal.value as any).elemRef.toggle();
 };
 
 const setPicture = (url: string) => {
@@ -135,18 +135,8 @@ const setPicture = (url: string) => {
   } else {
     defaultPicture.value = url;
   }
-  mediaGallery.value = false;
+  (mediaModal.value as any).elemRef.toggle();
 };
-
-watch(
-  () => testimonialModal.value,
-  (val) => {
-    if (!val) {
-      currentTestimonial.value = null;
-      defaultPicture.value = "/media/default.jpg";
-    }
-  }
-);
 </script>
 
 <template lang="pug">
@@ -158,13 +148,12 @@ watch(
         button(@click="newTestimonial") Add Testimonial
     AafTable(:data="testimonials.testimonials" :editable="true" @action="runAction")
 
-SrModal(:active="testimonialModal" @close="testimonialModal = false")
+SrModal(ref="testimonialModal")
   template(#body)
-    .sr-modal-body
       SrPicture(:src="testimonialPicture" :editable="true" @media-gallery="openMediaGallery")
       SrForm(:fieldsets="testimonalForm" submit="Add Testimonial" @submit="submitHandler")
 
-AafGallery(:gallery="gallery" path="/media/testimonials" :active="mediaGallery" @set-picture="setPicture" @delete-picture="gallery.splice($event, 1)" @push-picture="gallery.push($event)" @close="mediaGallery = false")
+AafGallery(ref="mediaModal" :gallery="gallery" path="/media/testimonials" @set-picture="setPicture" @delete-picture="gallery.splice($event, 1)" @push-picture="gallery.push($event)")
 </template>
 
 <style lang="scss" scoped>
